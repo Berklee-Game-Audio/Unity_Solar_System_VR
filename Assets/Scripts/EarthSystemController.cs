@@ -2,39 +2,28 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class EarthSystemController : MonoBehaviour {
+public class EarthSystemController : Planet
+{
 
-    public float radius = 34.0f;
-    public float speed = 0.5f;
     public float selfSpeed = 12.0f;
 
     private Transform Earth;
 
-	// Use this for initialization
-	void Start () {
-        Earth = this.transform.Find("Earth");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        Earth.Rotate(Vector3.up, Time.deltaTime * selfSpeed);
-        this.transform.localPosition = GetPosition(Time.time * speed);
-
-	}
-
-    private Vector3 GetPosition(float angle)
+    // Use this for initialization
+    void Start()
     {
-        return new Vector3(radius * Mathf.Sin(angle), 0, radius * Mathf.Cos(angle));
+        radius = 34.0f;
+        speed = 0.5f;
+        target_tag = 3;
+        header = "Earth";
+        info = "Mass: 5.97 * 10^24 kg\nDiameter: 12756 km\nGravity: 9.8 m/s^2\nDistance from Sun: 149.6  * 10^6 km\n\nMoon:\nMass: 0.073 * 10^24 kg\nDiameter: 3475 km\nGravity: 1.6 m/s^2\nDistance from Sun: 0.384 * 10^6 km";
+        Earth = this.transform.Find("Earth");
     }
-		
-	void OnMouseDown() {
-		bool zoom = ZoomTarget.zoom;
-		if (zoom) {
-			ZoomTarget.zoom = false;
-			ZoomTarget.target_tag = 0;
-		} else {
-			ZoomTarget.zoom = true;
-			ZoomTarget.target_tag = 3;
-		}
-	}
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        Earth.Rotate(Vector3.up, Time.deltaTime * selfSpeed);
+        base.Update();
+    }
 }

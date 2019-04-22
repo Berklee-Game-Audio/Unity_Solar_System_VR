@@ -1,40 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MarsController : MonoBehaviour {
-
-    public float radius = 45.72f;
-    public float speed = 0.4f;
-
-    // Use this for initialization
+public class MarsController : Planet
+{
     void Start()
     {
+        radius = 5.72f;
+        speed = 0.4f;
+        target_tag = 4;
+        header = "Mars";
+        info = "Mass: 0.642 * 10^24 kg\nDiameter: 6792 km\nGravity: 3.7 m/s^2\nDistance from Sun: 227.9 * 10^6 km";
+        transformPoint = new Vector3(0f, 0.7f, -4f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        this.transform.localPosition = GetPosition(Time.time * speed);
-    }
-
-    private Vector3 GetPosition(float angle)
-    {
-        return new Vector3(radius * Mathf.Sin(angle), 0, radius * Mathf.Cos(angle));
-    }
-
-	void OnMouseDown() {
-		bool zoom = ZoomTarget.zoom;
-		if (zoom) {
-			ZoomTarget.zoom = false;
-			ZoomTarget.target_tag = 0;
-			TimeScale.header = "Solar System";
-			TimeScale.info = "Mercury\nVenus\nEarth\nMars";
-		} else {
-			ZoomTarget.zoom = true;
-			ZoomTarget.target_tag = 4;
-			TimeScale.header = "Mars";
-			TimeScale.info = "Mass: 0.642 * 10^24 kg\nDiameter: 6792 km\nGravity: 3.7 m/s^2\nDistance from Sun: 227.9 * 10^6 km";
-		}
-	}
 }
