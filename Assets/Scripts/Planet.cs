@@ -19,7 +19,8 @@ public class Planet : MonoBehaviour
 
     protected virtual void Update()
     {
-        this.transform.localPosition = GetPosition(Time.time * speed);
+        // Arbitrary number to slow down orbital velocity. 
+        this.transform.localPosition = GetPosition(Time.time * speed / 7);
     }
     protected virtual void OnMouseDown()
     {
